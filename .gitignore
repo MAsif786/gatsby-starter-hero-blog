@@ -69,5 +69,5 @@ yarn-error.log
 # Exclude content directory but add .keep-content-dir to the repo
 # to preserve the empty directory in the repo. Site content will
 # be in another git repo which will be cloned into the content directory.
-content/
+./content/
 static/icons
