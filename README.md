@@ -26,6 +26,8 @@ This is a ready to use, easy to customize [GatsbyJS](https://www.gatsbyjs.org/) 
 * Post categories (category based post list)
 * Post tags (tag based post list)
 * Post "time to read" implementation
+* Draft or published status of posts controlled by `draft` being set to `true` or `false` in frontmatter of posts
+* Draft posts excluded from previous/next navigation
 * Full text searching (Algolia)
 * Contact form (Netlify form handling)
 * Form elements and validation with `ant-design`
