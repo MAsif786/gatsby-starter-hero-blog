@@ -42,7 +42,7 @@ do
 done
 
 if [ ! -e ./.env ]; then
-  cp -f ./starter/.env ./.env
+  cp -f ./starter/dot_env_starter ./.env
 fi
 
 if [ ! -d ./content/images ]; then
