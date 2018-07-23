@@ -11,7 +11,7 @@ export const ThemeContext = React.createContext(null);
 export const ScreenWidthContext = React.createContext(0);
 export const FontLoadedContext = React.createContext(false);
 
-import themeObjectFromYaml from "../theme/theme.yaml";
+import themeObjectFromYaml from "../../content/meta/theme.yaml";
 
 class Layout extends React.Component {
   constructor() {
@@ -158,7 +158,11 @@ export default Layout;
 export const postQuery = graphql`
   query LayoutQuery {
     pages: allMarkdownRemark(
-      filter: { id: { regex: "//pages//" }, fields: { prefix: { regex: "/^\\d+$/" } } }
+      filter: {
+        id: { regex: "//pages//" },
+        fields: { prefix: { regex: "/^\\d+$/" } },
+        frontmatter: { shownInMenu: {eq: true},  draft: { ne: true } }
+        }
       sort: { fields: [fields___prefix], order: ASC }
     ) {
       edges {
@@ -170,6 +174,7 @@ export const postQuery = graphql`
           frontmatter {
             title
             menuTitle
+            shownInMenu
           }
         }
       }

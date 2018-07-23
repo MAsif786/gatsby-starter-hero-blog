@@ -7,8 +7,8 @@ import Headline from "../Article/Headline";
 import Bodytext from "../Article/Bodytext";
 import Meta from "./Meta";
 import Author from "./Author";
-import Comments from "./Comments";
 import NextPrev from "./NextPrev";
+import TalkyardCommentsIframe from "@debiki/gatsby-plugin-talkyard";
 
 const Share = asyncComponent(() =>
   import("./Share")
@@ -23,11 +23,11 @@ const Post = props => {
     post,
     post: {
       html,
-      fields: { prefix, slug },
-      frontmatter: { title, author, category }
+      timeToRead,
+      fields: { prefix },
+      frontmatter: { title, category, author, tags }
     },
     authornote,
-    facebook,
     next: nextPost,
     prev: prevPost,
     theme
@@ -37,15 +37,22 @@ const Post = props => {
     <React.Fragment>
       <header>
         <Headline title={title} theme={theme} />
-        <Meta prefix={prefix} author={author} category={category} theme={theme} />
+        <Meta
+          prefix={prefix}
+          author={author}
+          category={category}
+          tags={tags}
+          theme={theme}
+          timeToRead={timeToRead}
+        />
       </header>
       <Bodytext html={html} theme={theme} />
       <footer>
         <Share post={post} theme={theme} />
         <Author note={authornote} theme={theme} />
         <NextPrev next={nextPost} prev={prevPost} theme={theme} />
-        <Comments slug={slug} facebook={facebook} theme={theme} />
       </footer>
+      <TalkyardCommentsIframe />
     </React.Fragment>
   );
 };
@@ -53,7 +60,6 @@ const Post = props => {
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   authornote: PropTypes.string.isRequired,
-  facebook: PropTypes.object.isRequired,
   next: PropTypes.object,
   prev: PropTypes.object,
   theme: PropTypes.object.isRequired

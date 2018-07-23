@@ -52,20 +52,22 @@ export default PostTemplate;
 //eslint-disable-next-line no-undef
 export const postQuery = graphql`
   query PostBySlug($slug: String!) {
-    post: markdownRemark(fields: { slug: { eq: $slug } }) {
+    post: markdownRemark(fields: { slug: { eq: $slug } }, frontmatter: { draft: { ne: true } }) {
       id
       html
+      timeToRead
       fields {
         slug
-        prefix
+        prefix(formatString: "MMM D, YYYY")
       }
       frontmatter {
         title
         author
         category
+        tags
         cover {
           childImageSharp {
-            resize(width: 300) {
+            resize(width: 800) {
               src
             }
           }

@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 require("core-js/fn/array/from");
-
-import FaHome from "react-icons/lib/fa/home";
-import FaSearch from "react-icons/lib/fa/search";
-import FaEnvelope from "react-icons/lib/fa/envelope";
-import FaTag from "react-icons/lib/fa/tag";
+import config from "../../../content/meta/config";
 
 import Item from "./Item";
 import Expand from "./Expand";
@@ -22,13 +18,21 @@ class Menu extends React.Component {
         : page.node.frontmatter.title
     }));
 
-    this.items = [
-      { to: "/", label: "Home", icon: FaHome },
-      { to: "/category/", label: "Categories", icon: FaTag },
-      { to: "/search/", label: "Search", icon: FaSearch },
-      ...pages,
-      { to: "/contact/", label: "Contact", icon: FaEnvelope }
-    ];
+    // Instead of hard-coding the menu items, they are specified in config.js
+    const primaryMenu = config.primaryMenu;
+
+    // Menu can be selectively enabled/disabled in config.js
+    this.items = primaryMenu.filter(menuItem => menuItem.enabled);
+
+    // We always want the Contact page, if it is enabled, to come last.
+    const idx = primaryMenu.findIndex(menuItem => menuItem.to == "/contact/");
+    const contactMenuEnabled = primaryMenu[idx].enabled;
+
+    if (contactMenuEnabled) {
+      this.items.splice(this.items.length - 1, 0, ...pages);
+    } else {
+      this.items.push(...pages);
+    }
 
     this.renderedItems = []; // will contain references to rendered DOM elements of menu
   }

@@ -1,6 +1,5 @@
 require("dotenv").config();
 const config = require("./content/meta/config");
-const transformer = require("./src/utils/algolia");
 
 const query = `{
   allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/posts|pages/[0-9]+.*--/"}}) {
@@ -24,9 +23,7 @@ const query = `{
 const queries = [
   {
     query,
-    transformer: ({ data }) => {
-      return data.allMarkdownRemark.edges.reduce(transformer, []);
-    }
+    transformer: ({ data }) => data.allMarkdownRemark.edges.map(({ node }) => node)
   }
 ];
 
@@ -62,10 +59,16 @@ module.exports = {
       }
     },
     {
+      resolve: `@debiki/gatsby-plugin-talkyard`,
+      options: {
+        talkyardServerUrl: `https://comments-demo.talkyard.io`
+      }
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images/`
+        path: `${__dirname}/content/images/`
       }
     },
     {
@@ -98,7 +101,9 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
-              backgroundColor: "transparent"
+              backgroundColor: "transparent",
+              linkImagesToOriginal: false,
+              showCaptions: false
             }
           },
           {
@@ -109,27 +114,7 @@ module.exports = {
           },
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
-          {
-            resolve: "gatsby-remark-emojis",
-            options: {
-              // Deactivate the plugin globally (default: true)
-              active: true,
-              // Add a custom css class
-              class: "emoji-icon",
-              // Select the size (available size: 16, 24, 32, 64)
-              size: 64,
-              // Add custom styles
-              styles: {
-                display: "inline",
-                margin: "0",
-                "margin-top": "1px",
-                position: "relative",
-                top: "5px",
-                width: "25px"
-              }
-            }
-          }
+          `gatsby-remark-smartypants`
         ]
       }
     },
@@ -251,10 +236,7 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`
     },
     {
-      resolve: "gatsby-plugin-react-svg",
-      options: {
-        include: /svg-icons/
-      }
+      resolve: "gatsby-plugin-svgr"
     }
   ]
 };

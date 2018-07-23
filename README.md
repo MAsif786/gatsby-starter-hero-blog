@@ -1,113 +1,162 @@
-# HeroBlog
+# HeroBlog - Modified
 
-A [GatsbyJS](https://www.gatsbyjs.org/) blog starter. <br /><br />
+This is a ready to use, easy to customize [GatsbyJS](https://www.gatsbyjs.org/) static site starter based on [a fork](https://github.com/cilkay/gatsby-starter-hero-blog) of the [Gatsby hero blog starter by Greg Lobinski](https://github.com/greglobinski/gatsby-starter-hero-blog) with a 'Hero' section on the home page. <br /><br />
 
-[![GitHub tag](https://img.shields.io/github/tag/greglobinski/gatsby-starter-hero-blog.svg)](https://github.com/greglobinski/gatsby-starter-personal-blog)
-[![GitHub stars](https://img.shields.io/github/stars/greglobinski/gatsby-starter-hero-blog.svg)](https://github.com/greglobinski/gatsby-starter-personal-blog/stargazers)
-[![GitHub license](https://img.shields.io/github/license/greglobinski/gatsby-starter-hero-blog.svg)](https://github.com/greglobinski/gatsby-starter-personal-blog/blob/master/LICENSE)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-![GitHub contributors](https://img.shields.io/github/contributors/greglobinski/gatsby-starter-hero-blog.svg)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/greglobinski/gatsby-starter-hero-blog.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fgreglobinski%2Fgatsby-starter-hero-blog)
+![](static/screens/gatsby-starter-hero-blog.gif) <br /><br />
 
-  <br />
+## Summary of Differences From the Original
 
-![](static/screens/gatsby-starter-hero-blog.gif) <br />
+* [Talkyard comments](https://www.talkyard.io/) has replaced Facebook comments.
+* The primary menu can be changed by editing a configuration file.
+* Tagging of posts is supported. Categories remain in the starter but are not especially useful if tagging is used.
+* A "time to read" header has been added for all posts.
+* The post author's name in the post header has been hidden by default. It's still available if you want it but if this starter is being used as a personal blog where there will only ever be one author, it makes no sense to have the author's name on every post header and again in the post footer.
+* A script that makes it convenient to generate new blog posts or pages is provided.
+* All the directories contained within the `content` directory have been excluded from this repository and a script has been provided to bootstrap the site and optionally, create test content. This is intended to make it easier to separate content you create from the code that generates the final pages that will eventually be deployed.
+* The site assets in `./src/images` has been moved to `./content/images` to isolate site-specific data from the code that generates the final pages.
 
-  <br />
+## Features
 
-See the starter in action » [demo website](https://gatsby-starter-hero-blog.greglobinski.com/) <br />For more information visit » [dev.greglobinski.com/gatsby-starter-hero-blog](https://dev.greglobinski.com/gatsby-starter-hero-blog/)
-
-## Description
-
-A ready to use, easy to customize 'like theme' starter with a 'Hero' section on the home page.
-
-## Features:
-
-* Easy editable content in **Markdown** files (posts, pages and parts)
-* **CSS** with `styled-jsx` and `PostCSS`
-* **SEO** (sitemap generation, robot.txt, meta and OpenGraph Tags)
-* **Social** sharing (Twitter, Facebook, Google, LinkedIn)
-* **Comments** (Facebook)
-* **Images** lazy loading and `webp` support (gatsby-image)
-* Post **categories** (category based post list)
-* Full text **searching** (Algolia)
-* **Contact** form (Netlify form handling)
+* Easily editable content in Markdown files (blog posts, pages, and parts)
+* CSS with `styled-jsx` and `PostCSS`
+* SEO (sitemap generation, robot.txt, meta and OpenGraph Tags)
+* Social sharing (Twitter, Facebook, Google, LinkedIn)
+* Comments (Talkyard)
+* Images - lazy loading and `webp` support (gatsby-image)
+* Post categories (category based post list)
+* Post tags (tag based post list)
+* Post "time to read" implementation
+* Full text searching (Algolia)
+* Contact form (Netlify form handling)
 * Form elements and validation with `ant-design`
-* **RSS** feed
-* 100% **PWA** (manifest.webmanifest, offline support, favicons)
-* Google **Analytics**
-* App **favicons** generator (node script)
-* Easy customizable base **styles** via `theme` object generated from `yaml` file (fonts, colors, sizes)
-* React **v.16.3** (gatsby-plugin-react-next)
-* **Components** lazy loading (social sharing)
-* **ESLint** (google config)
-* **Prettier** code styling
+* RSS feed
+* 100% Progressive Web App (manifest.webmanifest, offline support, favicons)
+* Google Analytics
+* App favicons generator (node script)
+* Easily customizable base styles via `theme` object generated from `yaml` file (fonts, colors, sizes)
+* Easily customizable primary menu
+* React v.16.3 (gatsby-plugin-react-next)
+* Components lazy loading (social sharing)
+* ESLint (Google config)
+* Prettier code styling
 * Webpack `BundleAnalyzerPlugin`
 
 ## Prerequisites
 
-If you do not have Gatsby Cli installed yet, do it first.
+ 1. [Git](https://gitforwindows.org/)
+ 1. [Node.js](https://nodejs.org/en/download/)
+ 1. Gatsby - install by typing `npm install --global gatsby-cli` if you don't already have it.
+ 1. The BASH shell for some of the helper scripts specific to this starter. If you are running Windows, the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) or [Git BASH](https://gitforwindows.org/) are viable options.
+ 1. A text editor that supports syntax highlighting. [Visual Studio Code](https://code.visualstudio.com/) is an excellent option. There are many others. VS Code has syntax highlighting extensions for Markdown, JavaScript, and styled JSX, all of which are used in this project.
 
-```text
-npm install --global gatsby-cli
+## Quick Start
+
+Type the command that you see below in the highlighted code segments into your shell.
+
+### Create Blog
+
+Create blog based on this starter wherever you want. Substitute whatever you want your blog directory to be called for `/path/to/your/new/blog` below.
+
+```bash
+gatsby new /path/to/your/new/blog https://github.com/cilkay/gatsby-starter-hero-blog.git
 ```
 
-More information on [GatsbyJS.org](https://www.gatsbyjs.org/tutorial/part-one)
+### Go to New Blog Directory
 
-## Getting started
+Go to the directory of the newly created blog.
 
-Install the starter using Gatsby Cli `gatsby new` command.
-
-```text
-gatsby new [NEW_SITE_DIRECTORY_FOR_YOUR_BLOG] https://github.com/greglobinski/gatsby-starter-hero-blog.git
+```bash
+cd /path/to/your/new/blog
 ```
 
-Go into the newly created directory and run
+### Install Node.js Packages
 
-```text
+Install all Node.js package dependencies.
+
+```bash
+yarn install
+```
+
+### Bootstrap Site
+
+Run the bootstrap script.
+
+```bash
+yarn bootstrap-site
+```
+
+#### No Starter Content
+
+If you did not copy any starter content, you must create some some before you go any further. This starter requires a cover image per blog post so at the very least, have some placeholder images before you start creating content.
+
+Run the content creation script and follow the prompts to create one or more posts and pages.
+
+```bash
+yarn new-content
+```
+
+### Start Gatbsy Server
+
+Start the Gatsby development web server.
+
+```bash
 gatsby develop
 ```
 
-to hot-serve your website on http://localhost:8000 or
+Congratulations! In a few easy steps, you now have a running site with some content that you can see by going to http://localhost:8000.
 
-```text
+## Revision Control
+
+Before you start customizing the site to fit your needs, you should give some thought to how you are going to manage changes. In [the original starter](https://github.com/greglobinski/gatsby-starter-hero-blog), the Markdown content, the configuration files, images that are site assets, that is, images that are not related to posts that you create, and the code that generates the pages and posts from the Markdown content are stored in the same git repository. The moment you delete the sample content that starter provided and replaced it with your own content, you will have created a changeset and if you wanted to track updates in the code for that starter, you will have to deal with potential merge conflicts.
+
+This fork deliberately treats content as something that should be kept under revision control in a different repository. That is done by putting the `content` directory in `./.gitignore` and adding `./content/.keep-content-dir` to the git repo for this starter to ensure that the `content` directory will remain in the source tree. (Git ignores empty directories.)
+
+Above, you either copied starter content or created your own content. The starter content is just that, something you can use to get the site up to see how it works. If you are using this as your blog, you'll delete that starter content, create your own Markdown content, and eventually publish the content generated from the Markdown you created in some manner.
+
+Everything in `./content` should be stored in a separate git repository. Strictly speaking, you could use any revision control system hosted anywhere so if you prefer Mercurial or something else, feel free to use that. The concepts are the same regardless of which revision control system you use.
+
+To put the `content` directory under revision control, create a new repo on GitHub, for example, and do the following.
+
+```bash
+cd content
+git init
+git add .
+git commit -m "Initial commit of blog content."
+git remote add origin /url/to/remote/repo
+git push origin master
+```
+
+If you do not like that approach, you are free to use the monolithic repository approach that the original starter used.
+
+## Customizing the Site
+
+Most of the customizations can be performed by changing things contained in `./content`. By modifying the following, you can make the site your own.
+
+### Configuration
+
+Edit the extensively commented `./content/meta/config.js` as necessary to customize it for your needs.
+
+### Environment Variables
+
+Open `./.env` and substitute all the occurrences of `XXXX` with values that are appropriate for you. During development, this is not strictly necessary but you must do this before deploying into production. This file will contain sensitive information that you must not check into a revision control system, like git. It is excluded by design in `.gitignore`. Do not change that.
+
+### Theme File
+
+You do not have to edit anything in `./content/meta/theme.yaml` right now, if ever. It is complete as it is and it will provide a nicely styled site for you. That file provides variables that are used throughout various files in `./src`. The site uses [styled-jsx](https://github.com/zeit/styled-jsx) and [PostCSS](https://github.com/postcss/postcss) for CSS styling. If you need to make more extensive changes than what would be possible through changing only `theme.yaml`, you will have to modify the source in `./src`.
+
+## Deploying Your Site
+
+The Gatsby site has directions on [how to deploy](https://www.gatsbyjs.org/docs/deploy-gatsby/) to various hosting providers.
+
+To create a static site that is ready to deploy, do the following.
+
+```bash
 gatsby build
 ```
 
-to create static site ready to host (/public).
+That will put all the build artefacts that are necessary to deploy in `./public`.
 
-##### External services
-
-The starter uses external services for some functions: comments, searching, analytics. To use them you have to secure some access data. All services are free to use or have generous free tiers big enough for a personal blog.
-
-Create an `.env` file like below in the root folder. Change `...` placeholders with real data.
-<br />By default, your `.env` file will be ignored by git. Remove `.env` from `.gitignore` in order to be able to push the file to your repository.
-
-```text
-GOOGLE_ANALYTICS_ID=...
-ALGOLIA_APP_ID=...
-ALGOLIA_SEARCH_ONLY_API_KEY=...
-ALGOLIA_ADMIN_API_KEY=...
-ALGOLIA_INDEX_NAME=...
-FB_APP_ID=...
-```
-
-### Instructions & tutorials
-
-* [How to install, setup and add new content to a Blog starter](https://dev.greglobinski.com/install-blog-starter/)
-* [Setup Algolia account for your GatsbyJS blog](https://dev.greglobinski.com/setup-algolia-account/)
-* More articles soon at [Front-end web development with Greg](https://dev.greglobinski.com/gatsby-starter-hero-blog/)
-
-## Windows users
-
-You should take a look at this: [Gatsby on Windows](https://www.gatsbyjs.org/docs/gatsby-on-windows/)
-
-## Authors
-
-* Greg Lobinski [@greglobinski](https://github.com/greglobinski)
-
-See also the list of [contributors](https://github.com/greglobinski/gatsby-starter-personal-blog/graphs/contributors) who participated in this project.
+You can see the starter in action at the [demo site](https://gatsby-starter-hero-blog-modified.cliffordilkay.com/).
 
 ## Contributing
 

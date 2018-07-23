@@ -75,15 +75,19 @@ export default IndexPage;
 export const guery = graphql`
   query IndexQuery {
     posts: allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "//posts/[0-9]+.*--/" } }
+      filter: {
+        fileAbsolutePath: { regex: "//posts/[0-9]+.*--/" }
+        frontmatter: { draft: { ne: true } }
+      }
       sort: { fields: [fields___prefix], order: DESC }
     ) {
       edges {
         node {
           excerpt
+          timeToRead
           fields {
             slug
-            prefix
+            prefix(formatString: "MMM D, YYYY")
           }
           frontmatter {
             title

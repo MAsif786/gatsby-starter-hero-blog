@@ -10,17 +10,17 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode, basePath: `pages` });
-    const separtorIndex = ~slug.indexOf("--") ? slug.indexOf("--") : 0;
-    const shortSlugStart = separtorIndex ? separtorIndex + 2 : 0;
+    const separatorIndex = ~slug.indexOf("--") ? slug.indexOf("--") : 0;
+    const shortSlugStart = separatorIndex ? separatorIndex + 2 : 0;
     createNodeField({
       node,
       name: `slug`,
-      value: `${separtorIndex ? "/" : ""}${slug.substring(shortSlugStart)}`
+      value: `${separatorIndex ? "/" : ""}${slug.substring(shortSlugStart)}`
     });
     createNodeField({
       node,
       name: `prefix`,
-      value: separtorIndex ? slug.substring(1, separtorIndex) : ""
+      value: separatorIndex ? slug.substring(1, separatorIndex) : ""
     });
   }
 };
@@ -32,12 +32,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     const postTemplate = path.resolve("./src/templates/PostTemplate.js");
     const pageTemplate = path.resolve("./src/templates/PageTemplate.js");
     const categoryTemplate = path.resolve("./src/templates/CategoryTemplate.js");
+    const tagTemplate = path.resolve("./src/templates/TagTemplate.js");
     resolve(
       graphql(
         `
           {
             allMarkdownRemark(
-              filter: { id: { regex: "//posts|pages//" } }
+              filter: { id: { regex: "//posts|pages//" }, frontmatter: { draft: { ne: true } } }
               sort: { fields: [fields___prefix], order: DESC }
               limit: 1000
             ) {
@@ -51,6 +52,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   frontmatter {
                     title
                     category
+                    tags
                   }
                 }
               }
@@ -64,6 +66,27 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
 
         const items = result.data.allMarkdownRemark.edges;
+
+        // Create tag list
+        let tags = [];
+        _.each(items, edge => {
+          if (_.get(edge, "node.frontmatter.tags")) {
+            tags = tags.concat(edge.node.frontmatter.tags);
+          }
+        });
+        // Eliminate duplicate tags
+        tags = _.uniq(tags);
+
+        // Make tag pages
+        tags.forEach(tag => {
+          createPage({
+            path: `/tags/${_.kebabCase(tag)}/`,
+            component: tagTemplate,
+            context: {
+              tag
+            }
+          });
+        });
 
         // Create category list
         const categorySet = new Set();
@@ -83,7 +106,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         const categoryList = Array.from(categorySet);
         categoryList.forEach(category => {
           createPage({
-            path: `/category/${_.kebabCase(category)}/`,
+            path: `/categories/${_.kebabCase(category)}/`,
             component: categoryTemplate,
             context: {
               category

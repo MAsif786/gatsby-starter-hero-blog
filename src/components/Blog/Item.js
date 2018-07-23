@@ -1,7 +1,9 @@
+import config from "../../../content/meta/config";
 import FaArrowRight from "react-icons/lib/fa/arrow-right";
 import FaCalendar from "react-icons/lib/fa/calendar";
 import FaTag from "react-icons/lib/fa/tag";
 import FaUser from "react-icons/lib/fa/user";
+import FaClock from "react-icons/lib/fa/clock-o";
 import Img from "gatsby-image";
 import Link from "gatsby-link";
 import PropTypes from "prop-types";
@@ -12,6 +14,7 @@ const Item = props => {
     theme,
     post: {
       excerpt,
+      timeToRead,
       fields: { slug, prefix },
       frontmatter: {
         title,
@@ -23,6 +26,11 @@ const Item = props => {
       }
     }
   } = props;
+
+  const primaryMenu = config.primaryMenu;
+  const idx = primaryMenu.findIndex(menuItem => menuItem.to == "/categories/");
+  const categoryMenuEnabled = primaryMenu[idx].enabled;
+  console.log(props);
 
   return (
     <React.Fragment>
@@ -36,14 +44,22 @@ const Item = props => {
             <span>
               <FaCalendar size={18} /> {prefix}
             </span>
+            {config.showAuthorName &&
+              author && (
+                <span>
+                  <FaUser size={18} /> {author}
+                </span>
+              )}
+            {categoryMenuEnabled &&
+              category && (
+                <span>
+                  <FaTag size={18} /> {category}
+                </span>
+              )}
             <span>
-              <FaUser size={18} /> {author}
+              <FaClock size={18} />
+              {timeToRead} min. read
             </span>
-            {category && (
-              <span>
-                <FaTag size={18} /> {category}
-              </span>
-            )}
           </p>
           <p>{excerpt}</p>
         </Link>
