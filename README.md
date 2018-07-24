@@ -60,7 +60,7 @@ Type the command that you see below in the highlighted code segments into your s
 Create blog based on this starter wherever you want. Substitute whatever you want your blog directory to be called for `/path/to/your/new/blog` below.
 
 ```bash
-gatsby new /path/to/your/new/blog https://github.com/cilkay/gatsby-starter-hero-blog.git
+git clone https://github.com/cilkay/gatsby-starter-hero-blog.git  /path/to/your/new/blog
 ```
 
 ### Go to New Blog Directory

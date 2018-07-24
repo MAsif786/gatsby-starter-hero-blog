@@ -654,6 +654,12 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@csstools/sass-import-resolve/-/sass-import-resolve-1.0.0.tgz#32c3cdb2f7af3cd8f0dca357b592e7271f3831b5"
 
+"@debiki/gatsby-plugin-talkyard@^0.5.7":
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/@debiki/gatsby-plugin-talkyard/-/gatsby-plugin-talkyard-0.5.7.tgz#910f670ba42a4c6aa45175e75130e0cd027c015d"
+  dependencies:
+    babel-runtime "^6.26.0"
+
 "@mapbox/stylelint-processor-arbitrary-tags@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@mapbox/stylelint-processor-arbitrary-tags/-/stylelint-processor-arbitrary-tags-0.2.0.tgz#4c2b50711bd9033a6c4f7f19e418b5f43f1a1e51"
