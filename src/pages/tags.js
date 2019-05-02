@@ -52,7 +52,10 @@ export const pageQuery = graphql`
   query TagsQuery {
     allMarkdownRemark(
       limit: 2000
-      filter: { fileAbsolutePath: { regex: "//posts/[0-9]+.*--/" } }
+      filter: {
+        fileAbsolutePath: { regex: "//posts/[0-9]+.*--/" }
+        frontmatter: { draft: { eq: false } }
+      }
       sort: { fields: [fields___prefix], order: DESC }
     ) {
       group(field: frontmatter___tags) {

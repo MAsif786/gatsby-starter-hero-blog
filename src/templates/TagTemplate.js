@@ -52,7 +52,7 @@ export const tagQuery = graphql`
     allMarkdownRemark(
       limit: 1000
       sort: { fields: [fields___prefix], order: DESC }
-      filter: { frontmatter: { tags: { eq: $tag }, draft: { ne: true } } }
+      filter: { frontmatter: { tags: { eq: $tag }, draft: { eq: false } } }
     ) {
       totalCount
       edges {
